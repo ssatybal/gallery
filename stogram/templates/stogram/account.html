@@ -3,6 +3,7 @@
 
 {% block content %}
 
+
 <form method = "post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
@@ -11,7 +12,7 @@
 
 <div>
     {% for photo in photos %}
-        <img src="{{ photo.path }}" alt="" />
+        <img src="{{ photo.path.url }}" alt="" />
         <p>{{ photo.description }}</p>
     {% endfor %}
 </div>

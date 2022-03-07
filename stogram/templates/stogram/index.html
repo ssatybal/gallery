@@ -1,1 +1,14 @@
 <h1>Hello world!</h1>
+
+<div style="display: flex; justify-content: flex-end">
+    <a href="{% url 'account_url' %}">Личный кабинет</a>
+</div>
+
+<div style="display: flex; flex-wrap: wrap">
+    {% for photo in photos %}
+        <div style="width: 33%">
+            <img src="{{ photo.path.url }}" style="max-width: 100%;" alt="">
+            <p>{{ photo.description }}</p>
+        </div>
+    {% endfor %}
+</div>
