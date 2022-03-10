@@ -13,7 +13,7 @@ def index(request):
 
 
 def toggle_favourite(request, photo_id):
-    exists_model = UserFavouritePhoto.objects.filter(user=request.user, photo=photo_id)
+    exists_model = UserFavouritePhoto.objects.filter(favourite_photo_user=request.user, favourite_photo=photo_id)
 
     if exists_model:
         exists_model.delete()
@@ -21,8 +21,8 @@ def toggle_favourite(request, photo_id):
 
     photo = Photo.objects.get(id=photo_id)
     new = UserFavouritePhoto()
-    new.user = request.user
-    new.photo = photo
+    new.favourite_photo_user = request.user
+    new.favourite_photo = photo
     new.save()
     return redirect('index_url')
 
