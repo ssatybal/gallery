@@ -21,7 +21,6 @@ def account(request):
             form.save()
     else:
         form = PhotoForm()
-    photos = Photo.objects.all()
+    photos = Photo.objects.select_related('user').all()
 
-    return render(request, 'stogram/account.html', {'form' : form, 'photos': photos})    
-
+    return render(request, 'stogram/account.html', {'form' : form, 'photos': photos})

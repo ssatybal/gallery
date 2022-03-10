@@ -1,5 +1,5 @@
 from django import forms
-from .models import Photo
+from .models import *
 
 class PhotoForm(forms.ModelForm):
 

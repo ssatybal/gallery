@@ -1,14 +1,68 @@
-<h1>Hello world!</h1>
+{% extends "base.html" %}
 
-<div style="display: flex; justify-content: flex-end">
+{% block content %}
+<div class="container">
+    <div class="row">
+<div class="col-sm-12 col-md-8 offset-md-2 mt-5 p-0 post-container">
+    {% for photo in photos %}
+    <a href="/">
+        <div class="media pt-3 pl-3 pb-1">
+                <img class="mr-3 rounded-circle" height="50" src="{{ photo.avatar }}", alt="title">
+                <div class="media-body">    
+                    <p style="margin-top: 5px;"></p>
+                </div>
+        </div>
+    </a>
+    <a href="/">
+        <img style="width: 50%;" src="{{ photo.path.url }}" alt="title">
+    </a>
+    <p class="mt-1 ml-2" >
+        <a href="" style="color: #000; font-size: 20px;">
+            <i class="far fa-heart"></i>
+        </a> 30 likes
+    </p>
+    <p class="ml-2 mt-0 mb-2">{{ photo.description }}</p>
+    {% endfor %}
+</div>
+    </div>
+</div>
+{% endblock %}    
+<!-- <div style="display: flex; justify-content: flex-end">
     <a href="{% url 'account_url' %}">Личный кабинет</a>
 </div>
 
-<div style="display: flex; flex-wrap: wrap">
+<div class="container">
+    <div class="row">
     {% for photo in photos %}
         <div style="width: 33%">
             <img src="{{ photo.path.url }}" style="max-width: 100%;" alt="">
             <p>{{ photo.description }}</p>
         </div>
+    </div>
     {% endfor %}
-</div>
+</div> -->
+
+
+<!-- <div class="col-sm-12 col-md-8 offset-md-2 mt-5 p-0 post-container">
+    {% for photo in photos %}
+    <a href="/">
+        <div class="media pt-3 pl-3 pb-1">
+                <img class="mr-3 rounded-circle" height="35" src="/" alt="/">
+                <div class="media-body">
+                    <p style="margin-top: 5px;">win</p>
+                </div>
+        </div>
+    </a>
+    <a href="/">
+        <img style="width: 100%;" src="{{ photo.path.url }}" alt="title">
+    </a>
+    <p class="mt-1 ml-2" >
+        <a href="" style="color: #000; font-size: 20px;">
+            <i class="far fa-heart"></i>
+        </a> 30 likes
+    </p>
+    <p class="ml-2 mt-0 mb-2">
+        <b>title</b> - <small>created</small>
+    </p>
+    {% endfor %}
+</div> -->
