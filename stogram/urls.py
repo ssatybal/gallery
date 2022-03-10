@@ -3,6 +3,7 @@ from .views import *
 from . import views
 
 urlpatterns = [
-    path('', views.index),
-    path('account', views.account, name='account_url')
+    path('', views.index, name='index_url'),
+    path('account', views.account, name='account_url'),
+    path('toggle_favourite/<int:photo_id>', views.toggle_favourite, name='toggle_favourite_url')
 ]

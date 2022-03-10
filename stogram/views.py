@@ -12,6 +12,21 @@ def index(request):
     return render(request, 'stogram/index.html', {'photos': photos, 'infos': infos})
 
 
+def toggle_favourite(request, photo_id):
+    exists_model = UserFavouritePhoto.objects.filter(user=request.user, photo=photo_id)
+
+    if exists_model:
+        exists_model.delete()
+        return redirect('index_url')
+
+    photo = Photo.objects.get(id=photo_id)
+    new = UserFavouritePhoto()
+    new.user = request.user
+    new.photo = photo
+    new.save()
+    return redirect('index_url')
+
+
 @login_required
 def account(request):
 
@@ -23,5 +38,6 @@ def account(request):
     else:
         form = PhotoForm()
     photos = Photo.objects.select_related('user').all()
+    favourite_photos = Photo.objects.filter(id__in=UserFavouritePhoto.objects.filter(favourite_photo_user=request.user))
 
     return render(request, 'stogram/account.html', {'form' : form, 'photos': photos})
