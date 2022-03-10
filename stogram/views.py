@@ -7,9 +7,8 @@ from django.shortcuts import redirect
 from .forms import PhotoForm
 
 def index(request):
-    infos = Profile.objects.all()
     photos = Photo.objects.select_related('user').all()
-    return render(request, 'stogram/index.html', {'photos': photos, 'infos': infos})
+    return render(request, 'stogram/index.html', {'photos': photos})
 
 
 def toggle_favourite(request, photo_id):
@@ -40,4 +39,4 @@ def account(request):
     photos = Photo.objects.select_related('user').all()
     favourite_photos = Photo.objects.filter(id__in=UserFavouritePhoto.objects.filter(favourite_photo_user=request.user))
 
-    return render(request, 'stogram/account.html', {'form' : form, 'photos': photos})
+    return render(request, 'stogram/account.html', {'form' : form, 'photos': photos, 'favorite_photos': favourite_photos})
