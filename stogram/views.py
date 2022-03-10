@@ -7,8 +7,9 @@ from django.shortcuts import redirect
 from .forms import PhotoForm
 
 def index(request):
-    photos = Photo.objects.all()
-    return render(request, 'stogram/index.html', {'photos': photos})
+    infos = Profile.objects.all()
+    photos = Photo.objects.select_related('user').all()
+    return render(request, 'stogram/index.html', {'photos': photos, 'infos': infos})
 
 
 @login_required
