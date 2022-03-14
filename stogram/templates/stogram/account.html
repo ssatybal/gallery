@@ -11,11 +11,13 @@
     <button type="submit">Upload</button>
 </form>
 
-<div>
-    {% for photo in photos %}
-        <img src="{{ photo.path.url }}" alt="" />
-        <p>{{ photo.description }}</p>
+  <div>
+    {% for favourite_photo in favourite_photos %}
+      <img src="{{ favourite_photo.photo.path.url }}">
+      {{ favourite_photo.photo.description }}
     {% endfor %}
-</div>
+  </div>
 
-{% endblock %}
+
+  
+  {% endblock %}

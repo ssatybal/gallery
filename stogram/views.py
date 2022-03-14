@@ -5,14 +5,16 @@ from .models import *
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from .forms import PhotoForm
+from django.db.models import Prefetch
 
 def index(request):
-    photos = Photo.objects.select_related('user').all()
-    return render(request, 'stogram/index.html', {'photos': photos})
+    photos = Photo.objects.select_related('user').prefetch_related(
+        Prefetch('favourite_photo', UserFavouritePhoto.objects.filter(user=request.user if not request.user.is_anonymous else None), to_attr="already_favourite"))
+    return render(request, 'stogram/index.html', {'photos': photos, 'is_user_anonymous': request.user.is_anonymous})
 
 
 def toggle_favourite(request, photo_id):
-    exists_model = UserFavouritePhoto.objects.filter(favourite_photo_user=request.user, favourite_photo=photo_id)
+    exists_model = UserFavouritePhoto.objects.filter(user=request.user, photo=photo_id)
 
     if exists_model:
         exists_model.delete()
@@ -20,8 +22,8 @@ def toggle_favourite(request, photo_id):
 
     photo = Photo.objects.get(id=photo_id)
     new = UserFavouritePhoto()
-    new.favourite_photo_user = request.user
-    new.favourite_photo = photo
+    new.user = request.user
+    new.photo = photo
     new.save()
     return redirect('index_url')
 
@@ -37,6 +39,13 @@ def account(request):
     else:
         form = PhotoForm()
     photos = Photo.objects.select_related('user').all()
-    favourite_photos = Photo.objects.filter(id__in=UserFavouritePhoto.objects.filter(favourite_photo_user=request.user))
+    favourite_photos = UserFavouritePhoto.objects.filter(user=request.user).select_related('photo')
 
-    return render(request, 'stogram/account.html', {'form' : form, 'photos': photos, 'favorite_photos': favourite_photos})
+    return render(request, 'stogram/account.html', {'form' : form, 'photos': photos, 'favourite_photos': favourite_photos})
+
+
+def delete_photo(request, photo_id):
+    data = Photo.objects.get(id=photo_id)
+    data.delete()
+    return redirect('index_url')
+

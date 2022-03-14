@@ -23,8 +23,8 @@ class Photo(models.Model):
 
 
 class UserFavouritePhoto(models.Model):
-    favourite_photo_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favourite_photo_user')
-    favourite_photo = models.ForeignKey(Photo, on_delete=models.CASCADE, related_name='favourite_photo')
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='favourite_photo_user')
+    photo = models.ForeignKey(Photo, on_delete=models.DO_NOTHING, related_name='favourite_photo')
 
     class Meta:
         db_table = 'favourite'
