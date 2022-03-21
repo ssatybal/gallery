@@ -7,9 +7,9 @@ from django.shortcuts import redirect
 from .forms import PhotoForm
 from django.db.models import Prefetch
 
+
 def index(request):
-    photos = Photo.objects.select_related('user').prefetch_related(
-        Prefetch('favourite_photo', UserFavouritePhoto.objects.filter(user=request.user if not request.user.is_anonymous else None), to_attr="already_favourite"))
+    photos = Photo.objects.select_related('user').prefetch_related(Prefetch('favourite_photo', UserFavouritePhoto.objects.filter(user=request.user if not request.user.is_anonymous else None), to_attr="already_favourite"))
     return render(request, 'stogram/index.html', {'photos': photos, 'is_user_anonymous': request.user.is_anonymous})
 
 

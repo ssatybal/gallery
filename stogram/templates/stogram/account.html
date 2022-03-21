@@ -11,12 +11,32 @@
     <button type="submit">Upload</button>
 </form>
 
-  <div>
+<div class="container">
+  <div class="row">
+  <div class="col-sm-12 col-md-8 offset-md-2 mt-5 p-0 post-container">
+    <a href="{% url 'account_url' %} %}" style='color: inherit;text-decoration: inherit;'></a>
     {% for favourite_photo in favourite_photos %}
+      <div class="media pt-3 pl-3 pb-1">
+          <img class="mr-3 rounded-circle" height="35" src="{{ photo.user.avatar.url }}" alt="{{ photo.user.name }}">
+              <div class="media-body">    
+                  <p style="margin-top: 5px;">{{ photo.user.name }}</p>
+              </div>
+      </div>
+  </a>
+  <a href="/">
+    <img style="width: 50%;" src="{{ favourite_photo.photo.path.url }}" alt="title">
+</a>
+<p class="mt-1 ml-2" >
+    <a href="" style="color: #000; font-size: 20px;">
+        <i class="far fa-heart"></i>
+    </a> 30 likes
+<!-- 
       <img src="{{ favourite_photo.photo.path.url }}">
       {{ favourite_photo.photo.description }}
     {% endfor %}
   </div>
+    </div>
+  </div> -->
 
 
   
