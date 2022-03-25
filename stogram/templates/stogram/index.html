@@ -15,28 +15,29 @@
             <span class="special">{{ photo.user.name }}</span>
         </div>
     </a>
-    <a href="/" class="mainImageBlock">
+    <a class="mainImageBlock">
         <img src="{{ photo.path.url }}" alt="title">
     </a>
     <div class="mainImageBottom">
-    <span class="special1">{{ photo.user.name }}</span>
-        <p class="ml-2 mt-0 mb-2">{{ photo.description }}</p>
-        <button class="FavouriteButton">
-            {% if not is_user_anonymous %}     
-            <a href class="{% url 'toggle_favourite_url' photo_id=photo.id %}">
+        <p class="comment">{{ photo.description }}
+            {% if not is_user_anonymous %}
+            <!--button class="FavBut"-->  
+            <br/>
+               
+            <a class="FavBut" href="{% url 'toggle_favourite_url' photo_id=photo.id %}">
 
-                    {% if photo.already_favourite %}
-                        Удалить из избранного
-                    {% else %}
-                        Добавить в избранное
-                    {% endif %}
+                {% if photo.already_favourite %}
+                    Удалить из избранного
+                {% else %}
+                    Добавить в избранное
+                {% endif %}
                 
             </a>
             {% else %}
                 <a href="{% url 'login' %}">Авторизуйтесь чтобы добавить в избранное</a>
             {% endif %}
-        </button>
-        </p> 
+            <!--/button-->
+        </p>
     </div>
     {% endfor %}
 </div>
