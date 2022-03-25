@@ -87,7 +87,7 @@ p {
 
 
 .FavBut {
-    background-color: #f14848;
+    background-color: steelblue;
     color: white; text-decoration:none;
     border-radius: 4px;
 }
@@ -131,9 +131,11 @@ a {
 }
 
 
-.FavButton {
-    background-color: #199319;
-    color: white;
-    padding: 15px 25px;
-    text-decoration: none;
+.DelBut {
+    background-color: #f14848;
+    color: white; text-decoration:none;
+    border-radius: 4px;
+    margin: 0;
+    text-align: center;
+    margin-left: 15px;
 }

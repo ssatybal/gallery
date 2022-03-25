@@ -36,8 +36,10 @@
             {% else %}
                 <a href="{% url 'login' %}">Авторизуйтесь чтобы добавить в избранное</a>
             {% endif %}
-            <!--/button-->
-        </p>
+            
+
+            <a class="DelBut" href="{% url 'delete_photo_url' photo_id=photo.id %}">Удалить фотографию</a>
+    </p>
     </div>
     {% endfor %}
 </div>
